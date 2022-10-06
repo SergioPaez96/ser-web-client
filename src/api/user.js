@@ -54,20 +54,20 @@ export function getUsersApi(token) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token
-    }
-  }
+      Authorization: token,
+    },
+  };
 
   return fetch(url, params)
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .then(result => {
+    .then((result) => {
       return result;
     })
-    .catch(err => {
+    .catch((err) => {
       return err.message;
-    })
+    });
 }
 
 export function getUsersActiveApi(token, status) {
@@ -77,20 +77,20 @@ export function getUsersActiveApi(token, status) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token
-    }
-  }
+      Authorization: token,
+    },
+  };
 
   return fetch(url, params)
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .then(result => {
+    .then((result) => {
       return result;
     })
-    .catch(err => {
+    .catch((err) => {
       return err.message;
-    })
+    });
 }
 
 export function uploadAvatarApi(token, avatar, userId) {
@@ -102,30 +102,32 @@ export function uploadAvatarApi(token, avatar, userId) {
     method: "PUT",
     body: formData,
     headers: {
-      Authorization: token
-    }
-  }
+      Authorization: token,
+    },
+  };
 
   return fetch(url, params)
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .then(result => {
+    .then((result) => {
       return result;
     })
-    .catch(err => {
+    .catch((err) => {
       return err.message;
-    })
+    });
 }
 
 export function getAvatarApi(avatarName) {
   const url = `${basePath}/${apiVersion}/get-avatar/${avatarName}`;
 
-  return fetch(url).then(response => {
-    return response.url;
-  }).catch(err => {
-    return err.message;
-  })
+  return fetch(url)
+    .then((response) => {
+      return response.url;
+    })
+    .catch((err) => {
+      return err.message;
+    });
 }
 
 export function updateUserApi(token, user, userId) {
@@ -134,19 +136,89 @@ export function updateUserApi(token, user, userId) {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token
+      Authorization: token,
     },
-    body: JSON.stringify(user)
-  }
+    body: JSON.stringify(user),
+  };
 
   return fetch(url, params)
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .then(result => {
+    .then((result) => {
       return result;
     })
-    .catch(err => {
+    .catch((err) => {
+      return err.message;
+    });
+}
+
+export function activateUserApi(token, userId, status) {
+  const url = `${basePath}/${apiVersion}/activate-user/${userId}`;
+  const params = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      active: status,
+    }),
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result.message;
+    })
+    .catch((err) => {
+      return err.message;
+    });
+}
+
+export function deleteUserApi(token, userId) {
+  const url = `${basePath}/${apiVersion}/delete-user/${userId}`;
+  const params = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result.message;
+    })
+    .catch((err) => {
+      return err.message;
+    });
+}
+
+export function signUpAdminApi(token, data) {
+  const url = `${basePath}/${apiVersion}/sign-up-admin`;
+  const params = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Atuthorization: token,
+    },
+    body: JSON.stringify(data),
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result.message;
+    })
+    .catch((err) => {
       return err.message;
     });
 }

@@ -20,25 +20,24 @@ export default function LoginForm() {
     });
   };
 
-  const login = async(e) => {
+  const login = async (e) => {
     e.preventDefault();
     const result = await signInApi(inputs);
-    if(result.message){
-        notification["error"]({
-            message: result.message
-        })
+    if (result.message) {
+      notification["error"]({
+        message: result.message,
+      });
     } else {
-        const {accessToken, refreshToken} = result;
-        localStorage.setItem(ACCESS_TOKEN, accessToken);
-        localStorage.setItem(REFRESH_TOKEN, refreshToken);
+      const { accessToken, refreshToken } = result;
+      localStorage.setItem(ACCESS_TOKEN, accessToken);
+      localStorage.setItem(REFRESH_TOKEN, refreshToken);
 
-        notification["success"]({
-            message: "Login correcto."
-        });
+      notification["success"]({
+        message: "Login correcto.",
+      });
 
-        window.location.href = "/admin";
+      window.location.href = "/admin";
     }
-    console.log(result);
   };
 
   return (
