@@ -6,6 +6,7 @@ import LayoutBasic from "../layouts/LayoutBasic";
 import Admin from "../pages/Admin";
 import SignIn from "../pages/Admin/SignIn";
 import Users from "../pages/Admin/Users";
+import MenuWeb from "../pages/Admin/MenuWeb";
 
 // CLIENT PAGES
 import Home from "../pages/Home";
@@ -35,7 +36,12 @@ const routes = [
         component: Users,
         exact: true,
       },
-    ]
+      {
+        path: "/admin/menu",
+        component: MenuWeb,
+        exact: true,
+      },
+    ],
   },
   {
     path: "/",
@@ -52,7 +58,7 @@ const routes = [
         component: Contact,
         exact: false,
       },
-    ]
+    ],
   },
 ];
 

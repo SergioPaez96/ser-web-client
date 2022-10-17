@@ -20,7 +20,40 @@ export default function AddUserForm(props) {
 
   const addUser = (e) => {
     e.preventDefault();
-    console.log("Creando Usuario...");
+
+    if (
+      !userData.name ||
+      !userData.lastname ||
+      !userData.role ||
+      !userData.email ||
+      !userData.password ||
+      !userData.repeatPass
+    ) {
+      notification["error"]({
+        message: "Todos los campos son obligatorios.",
+      });
+    } else if (userData.password !== userData.repeatPass) {
+      notification["error"]({
+        message: "Las contraseñas tienen que ser iguales.",
+      });
+    } else {
+      const accessToken = getAccessTokenApi();
+
+      signUpAdminApi(accessToken, userData)
+        .then((response) => {
+          notification["success"]({
+            message: response,
+          });
+          setIsVisibleModal(false);
+          setReloadUsers(true);
+          setUserData({});
+        })
+        .catch((err) => {
+          notification["error"]({
+            message: err,
+          });
+        });
+    }
   };
 
   return (

@@ -206,7 +206,7 @@ export function signUpAdminApi(token, data) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Atuthorization: token,
+      Authorization: token,
     },
     body: JSON.stringify(data),
   };
